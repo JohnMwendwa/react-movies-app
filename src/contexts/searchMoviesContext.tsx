@@ -12,7 +12,7 @@ interface SearchMoviesContextProps {
   setQuery: React.Dispatch<React.SetStateAction<string>>;
 }
 
-interface Movie {
+export interface Movie {
   id: number;
   url: string;
   imd_code: string;
@@ -67,6 +67,25 @@ export const SearchMoviesProvider = ({
 }: SearchMoviesProviderProps) => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    let mount = true;
+    if (mount) {
+      fetchMovies();
+    }
+    return () => {
+      mount = false;
+    };
+  }, []);
+
+  const fetchMovies = async () => {
+    const request = await fetch("https://yts.mx/api/v2/list_movies.json");
+    const res = await request.json();
+
+    if (res.status === "ok") {
+      setMovies(res.data.movies);
+    }
+  };
 
   return (
     <SearchMoviesContext.Provider value={{ movies, query, setQuery }}>
