@@ -1,4 +1,10 @@
-import { ReactNode, createContext, useEffect, useState } from "react";
+import {
+  ReactNode,
+  createContext,
+  useEffect,
+  useState,
+  useContext,
+} from "react";
 
 interface SearchMoviesProviderProps {
   children: ReactNode;
@@ -6,7 +12,13 @@ interface SearchMoviesProviderProps {
 
 const SearchMoviesContext = createContext({});
 
-const SearchMoviesProvider = ({ children }: SearchMoviesProviderProps) => {
+export const useSearchMoviesContext = () => {
+  return useContext(SearchMoviesContext);
+};
+
+export const SearchMoviesProvider = ({
+  children,
+}: SearchMoviesProviderProps) => {
   return (
     <SearchMoviesContext.Provider value={{}}>
       {children}
