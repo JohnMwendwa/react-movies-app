@@ -8,7 +8,7 @@ export default function Home() {
       <h1 className="font-bold text-3xl text-center my-2 hidden md:block">
         Download YTS YIFY movies: HD smallest size
       </h1>
-      <div>
+      <div className="grid gap-4 grid-cols-[repeat(auto-fit,_210px)] place-content-center">
         {movies.map((movie) => (
           <MovieCard key={movie.id} {...movie} />
         ))}
