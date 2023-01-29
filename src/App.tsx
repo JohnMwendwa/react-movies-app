@@ -5,6 +5,7 @@ import { SearchMoviesProvider } from "./contexts/searchMoviesContext";
 import Layout from "./layout/Layout";
 import NotFoundPage from "./pages/404";
 import Home from "./pages/Home";
+import MovieDetailsPage from "./pages/MovieDetailsPage";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/movies/:id" element={<h1>Movie Details</h1>} />
+          <Route path="/movies/:id" element={<MovieDetailsPage />} />
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
       </Layout>
