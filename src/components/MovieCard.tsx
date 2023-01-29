@@ -15,7 +15,7 @@ export default function MovieCard(props: Movie) {
           />
 
           <div className="hidden absolute inset-0  group-hover:flex flex-col items-center justify-center text-white font-extrabold bg-gray-800/75 text-2xl ">
-            <span aria-labe="start icon" className="text-yellow-400 text-3xl">
+            <span aria-label="start icon" className="text-yellow-400 text-3xl">
               &#10032;
             </span>
             <div className="mb-4 text-3xl">{props.rating} / 10</div>
