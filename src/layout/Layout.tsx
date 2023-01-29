@@ -5,5 +5,9 @@ interface LayoutProps {
 }
 
 export default function Layout({ children }: LayoutProps) {
-  return <div>{children}</div>;
+  return (
+    <div className="max-w-4xl px-4 py-3 lg:px-6 lg:py-4 mx-auto">
+      {children}
+    </div>
+  );
 }
