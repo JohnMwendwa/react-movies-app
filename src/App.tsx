@@ -1,13 +1,14 @@
 import { Routes, Route } from "react-router-dom";
 
 import NavBar from "./components/NavBar";
+import { SearchMoviesProvider } from "./contexts/searchMoviesContext";
 import Layout from "./layout/Layout";
 import NotFoundPage from "./pages/404";
 import Home from "./pages/Home";
 
 function App() {
   return (
-    <div>
+    <SearchMoviesProvider>
       <NavBar />
       <Layout>
         <Routes>
@@ -15,7 +16,7 @@ function App() {
           <Route path="/*" element={<NotFoundPage />} />
         </Routes>
       </Layout>
-    </div>
+    </SearchMoviesProvider>
   );
 }
 
