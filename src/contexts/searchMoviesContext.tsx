@@ -9,7 +9,7 @@ import {
 interface SearchMoviesContextProps {
   movies: Movie[];
   query: string;
-  setQuery: () => void;
+  setQuery: React.Dispatch<React.SetStateAction<string>>;
 }
 
 interface Movie {
@@ -65,8 +65,11 @@ export const useSearchMoviesContext = () => {
 export const SearchMoviesProvider = ({
   children,
 }: SearchMoviesProviderProps) => {
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [query, setQuery] = useState("");
+
   return (
-    <SearchMoviesContext.Provider value={{}}>
+    <SearchMoviesContext.Provider value={{ movies, query, setQuery }}>
       {children}
     </SearchMoviesContext.Provider>
   );
