@@ -1,5 +1,12 @@
 {
   "name": "movies-app",
+  "description": "A react movie app for watching and downloading movies",
+  "author": "John Mwendwa",
+  "keywords": [
+    "react",
+    "Tailwind",
+    "TypeScript"
+  ],
   "private": true,
   "version": "1.0.0",
   "type": "module",
