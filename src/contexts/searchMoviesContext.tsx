@@ -5,6 +5,7 @@ import {
   useState,
   useContext,
 } from "react";
+import { useDebounce } from "../hooks/useDebounce";
 
 interface SearchMoviesContextProps {
   movies: Movie[];
@@ -67,6 +68,19 @@ export const SearchMoviesProvider = ({
 }: SearchMoviesProviderProps) => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [query, setQuery] = useState("");
+  const [loading, setLoading] = useState(false);
+  const debouncedQuery = useDebounce(query, 500);
+
+  useEffect(() => {
+    let mount = true;
+    if (mount && debouncedQuery) {
+      fetchSearchedMovie();
+    }
+
+    return () => {
+      mount = false;
+    };
+  }, [debouncedQuery]);
 
   useEffect(() => {
     let mount = true;
@@ -78,12 +92,35 @@ export const SearchMoviesProvider = ({
     };
   }, []);
 
+  // Default movies to display
   const fetchMovies = async () => {
+    setLoading(true);
     const request = await fetch("https://yts.mx/api/v2/list_movies.json");
     const res = await request.json();
 
     if (res.status === "ok") {
+      setLoading(false);
       setMovies(res.data.movies);
+      return;
+    }
+    setLoading(false);
+  };
+
+  // Movies searched by the user
+  const fetchSearchedMovie = async () => {
+    setLoading(true);
+    const request = await fetch(
+      `https://yts.mx/api/v2/list_movies.json?query_term=${debouncedQuery}`
+    );
+    const res = await request.json();
+
+    if (res.status === "ok") {
+      setLoading(false);
+      if (res.data.movies) {
+        setMovies(res.data.movies);
+      }
+    } else {
+      setLoading(false);
     }
   };
 
