@@ -1,6 +1,6 @@
-import { Movie } from "../contexts/searchMoviesContext";
+import { MovieDetailsProps } from "../pages/MovieDetailsPage";
 
-export default function MovieDetails(props: Movie) {
+export default function MovieDetails(props: MovieDetailsProps) {
   return (
     <div>
       <div className="flex ">
@@ -55,7 +55,18 @@ export default function MovieDetails(props: Movie) {
           </button>
         </div>
       </div>
-
+      <div className="hidden sm:block mt-4 w-full">
+        <div>
+          <iframe
+            width={516}
+            height={315}
+            src={`https://www.youtube.com/embed/${props.yt_trailer_code}`}
+            title={`${props.title_english} youtube trailer`}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        </div>
+      </div>
       <h3 className="font-bold text-2xl mt-4 ">Plot Summary</h3>
       <p className="text-xl text-gray-600">{props.description_full}</p>
     </div>
