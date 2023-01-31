@@ -10,6 +10,7 @@ import { useDebounce } from "../hooks/useDebounce";
 interface SearchMoviesContextProps {
   movies: Movie[];
   query: string;
+  loading: boolean;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
 }
 
@@ -125,7 +126,7 @@ export const SearchMoviesProvider = ({
   };
 
   return (
-    <SearchMoviesContext.Provider value={{ movies, query, setQuery }}>
+    <SearchMoviesContext.Provider value={{ movies, query, setQuery, loading }}>
       {children}
     </SearchMoviesContext.Provider>
   );
