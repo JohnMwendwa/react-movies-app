@@ -1,9 +1,6 @@
-import { Link } from "react-router-dom";
-
 import { MovieDetailsProps } from "../pages/MovieDetailsPage";
 
 export default function MovieDetails(props: MovieDetailsProps) {
-  console.log(props.torrents);
   return (
     <div>
       <div className="flex ">
@@ -36,10 +33,13 @@ export default function MovieDetails(props: MovieDetailsProps) {
             {props.torrents?.map((t, idx) => (
               <span
                 key={idx}
-                className="rounded-md border px-4 py-1 mr-2 font-bold"
+                className="rounded-md border border-gray-400 px-4 py-1 mr-2 font-medium hover:text-green-400 hover:border-gray-900 duration-300 ease-in-out"
                 title={`Download ${props.title_long} ${t.quality} Torrent`}
               >
-                <a href={t.url}> {t.quality}</a>
+                <a href={t.url}>
+                  {" "}
+                  {t.quality} <span className="uppercase">{t.type}</span>
+                </a>
               </span>
             ))}
           </div>
