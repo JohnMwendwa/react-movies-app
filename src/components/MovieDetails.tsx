@@ -58,10 +58,12 @@ export default function MovieDetails(props: MovieDetailsProps) {
       <div className="hidden sm:block mt-4 w-full">
         <div>
           <iframe
+            className="bg-gray-400"
             width={516}
             height={315}
             src={`https://www.youtube.com/embed/${props.yt_trailer_code}`}
             title={`${props.title_english} youtube trailer`}
+            aria-label={`${props.title_english} youtube trailer`}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
           />
