@@ -1,6 +1,9 @@
+import { Link } from "react-router-dom";
+
 import { MovieDetailsProps } from "../pages/MovieDetailsPage";
 
 export default function MovieDetails(props: MovieDetailsProps) {
+  console.log(props.torrents);
   return (
     <div>
       <div className="flex ">
@@ -34,8 +37,9 @@ export default function MovieDetails(props: MovieDetailsProps) {
               <span
                 key={idx}
                 className="rounded-md border px-4 py-1 mr-2 font-bold"
+                title={`Download ${props.title_long} ${t.quality} Torrent`}
               >
-                {t.quality}
+                <a href={t.url}> {t.quality}</a>
               </span>
             ))}
           </div>
