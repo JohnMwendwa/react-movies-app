@@ -1,6 +1,9 @@
+import { useState } from "react";
+
 import { MovieDetailsProps } from "../pages/MovieDetailsPage";
 
 export default function MovieDetails(props: MovieDetailsProps) {
+  const [openModal, setOpenModal] = useState(false);
   return (
     <div>
       <div className="flex ">
