@@ -1,9 +1,12 @@
 import { useState } from "react";
 
 import { MovieDetailsProps } from "../pages/MovieDetailsPage";
+import Modal from "./Modal";
 
 export default function MovieDetails(props: MovieDetailsProps) {
   const [openModal, setOpenModal] = useState(false);
+
+  const closeModal = () => setOpenModal(false);
   return (
     <div>
       <div className="flex ">
@@ -46,7 +49,10 @@ export default function MovieDetails(props: MovieDetailsProps) {
               </span>
             ))}
           </div>
-          <button className="px-4 py-2 text-white bg-green-500 font-bold text-2xl rounded-md mt-4 flex items-baseline">
+          <button
+            className="px-4 py-2 text-white bg-green-500 font-bold text-2xl rounded-md mt-4 flex items-baseline"
+            onClick={() => setOpenModal(true)}
+          >
             <svg
               viewBox="0 0 96 96"
               xmlns="http://www.w3.org/2000/svg"
@@ -60,6 +66,7 @@ export default function MovieDetails(props: MovieDetailsProps) {
             </svg>
             Download
           </button>
+          {openModal && <Modal openModal={openModal} closeModal={closeModal} />}
         </div>
       </div>
       <div className="hidden sm:block mt-4 w-full">
