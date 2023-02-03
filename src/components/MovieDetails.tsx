@@ -9,7 +9,23 @@ export default function MovieDetails(props: MovieDetailsProps) {
 
   const closeModal = () => setOpenModal(false);
   return (
-    <div className="my-4">
+    <div className="my-4 ">
+      <div className="md:hidden">
+        <h1 className="font-extrabold text-3xl mb- ">{props.title_english}</h1>
+        <p className="text-lg font-medium text-gray-500">{props.year}</p>
+        <div className="text-lg mb-4 font-medium text-gray-500">
+          {props.genres?.map((g, idx) => {
+            return (
+              <span key={idx} className="">
+                {g}
+                {props.genres.length > 0 && props.genres.length - 1 !== idx
+                  ? " / "
+                  : ""}
+              </span>
+            );
+          })}
+        </div>
+      </div>
       <div className="flex ">
         <img
           src={props.medium_cover_image}
@@ -20,39 +36,50 @@ export default function MovieDetails(props: MovieDetailsProps) {
         />
 
         <div className="ml-8">
-          <h1 className="font-extrabold text-5xl mb-4">
-            {props.title_english}
-          </h1>
-          <p className="text-lg font-medium text-gray-500">{props.year}</p>
-          <div className="text-lg mb-4 font-medium text-gray-500">
-            {props.genres?.map((g, idx) => {
-              return (
-                <span key={idx} className="">
-                  {g}
-                  {props.genres.length > 0 && props.genres.length - 1 !== idx
-                    ? " / "
-                    : ""}
-                </span>
-              );
-            })}
+          <div className="md:block hidden">
+            <h1 className="font-extrabold text-5xl mb-4 ">
+              {props.title_english}
+            </h1>
+            <p className="text-lg font-medium text-gray-500">{props.year}</p>
+            <div className="text-lg mb-4 font-medium text-gray-500">
+              {props.genres?.map((g, idx) => {
+                return (
+                  <span key={idx} className="">
+                    {g}
+                    {props.genres.length > 0 && props.genres.length - 1 !== idx
+                      ? " / "
+                      : ""}
+                  </span>
+                );
+              })}
+            </div>
           </div>
-
           <div>
-            <span className="text-xl">Available in : </span>
+            <span className="md:text-xl text-lg">Available in : </span>
             {props.torrents?.map((t, idx) => (
-              <span
-                key={idx}
-                className="rounded-md border border-gray-400 px-4 py-1 mr-2 font-medium hover:text-green-400 hover:border-gray-900 duration-300 ease-in-out"
-                title={`Download ${props.title_long} ${t.quality} Torrent`}
-              >
-                <a href={t.url}>
-                  {t.quality} <span className="uppercase">{t.type}</span>
-                </a>
-              </span>
+              <>
+                <span
+                  key={idx}
+                  className="rounded-md border border-gray-400 px-2 md:px-4 py-1 md:mr-2 font-medium hover:text-green-400 hover:border-gray-900 duration-300 ease-in-out md:inline-block mt-2 hidden"
+                  title={`Download ${props.title_long} ${t.quality} Torrent`}
+                >
+                  <a href={t.url}>
+                    {t.quality} <span className="uppercase">{t.type}</span>
+                  </a>
+                </span>
+                <DownloadBtn className="text-base bg-transparent border text-black border-black rounded-none py-1 md:hidden">
+                  <a href={t.url}>{t.quality}</a>
+                </DownloadBtn>
+              </>
             ))}
           </div>
 
-          <DownloadBtn onClick={() => setOpenModal(true)}>Download</DownloadBtn>
+          <DownloadBtn
+            onClick={() => setOpenModal(true)}
+            className="hidden md:flex"
+          >
+            Download
+          </DownloadBtn>
 
           {openModal && (
             <Modal openModal={openModal} closeModal={closeModal}>
