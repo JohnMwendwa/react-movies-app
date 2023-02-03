@@ -1,6 +1,14 @@
-export default function DownloadBtn() {
+import { ButtonHTMLAttributes } from "react";
+interface DownloadBtnProps {
+  onClick: () => void;
+}
+
+export default function DownloadBtn({ onClick }: DownloadBtnProps) {
   return (
-    <button className="px-4 py-2 text-white bg-green-500 font-bold text-2xl rounded-md mt-4 flex items-baseline">
+    <button
+      className="px-4 py-2 text-white bg-green-500 font-bold text-2xl rounded-md mt-4 flex items-baseline"
+      onClick={onClick}
+    >
       <svg
         viewBox="0 0 96 96"
         xmlns="http://www.w3.org/2000/svg"
