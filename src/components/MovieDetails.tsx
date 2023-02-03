@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { MovieDetailsProps } from "../pages/MovieDetailsPage";
+import DownloadBtn from "./DownloadBtn";
 import Modal from "./Modal";
 
 export default function MovieDetails(props: MovieDetailsProps) {
@@ -8,7 +9,7 @@ export default function MovieDetails(props: MovieDetailsProps) {
 
   const closeModal = () => setOpenModal(false);
   return (
-    <div>
+    <div className="my-4">
       <div className="flex ">
         <img
           src={props.medium_cover_image}
@@ -19,9 +20,11 @@ export default function MovieDetails(props: MovieDetailsProps) {
         />
 
         <div className="ml-8">
-          <h1 className="font-extrabold text-5xl">{props.title_english}</h1>
-          <p>{props.year}</p>
-          <div>
+          <h1 className="font-extrabold text-5xl mb-4">
+            {props.title_english}
+          </h1>
+          <p className="text-lg font-medium text-gray-500">{props.year}</p>
+          <div className="text-lg mb-4 font-medium text-gray-500">
             {props.genres?.map((g, idx) => {
               return (
                 <span key={idx} className="">
@@ -43,30 +46,47 @@ export default function MovieDetails(props: MovieDetailsProps) {
                 title={`Download ${props.title_long} ${t.quality} Torrent`}
               >
                 <a href={t.url}>
-                  {" "}
                   {t.quality} <span className="uppercase">{t.type}</span>
                 </a>
               </span>
             ))}
           </div>
-          <button
-            className="px-4 py-2 text-white bg-green-500 font-bold text-2xl rounded-md mt-4 flex items-baseline"
-            onClick={() => setOpenModal(true)}
-          >
-            <svg
-              viewBox="0 0 96 96"
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 mr-2 fill-gray-700"
-            >
-              <title />
-              <g>
-                <path d="M90,54a5.9966,5.9966,0,0,0-6,6V78H12V60A6,6,0,0,0,0,60V84a5.9966,5.9966,0,0,0,6,6H90a5.9966,5.9966,0,0,0,6-6V60A5.9966,5.9966,0,0,0,90,54Z" />
-                <path d="M43.7578,64.2422a5.9979,5.9979,0,0,0,8.4844,0l18-18a5.9994,5.9994,0,0,0-8.4844-8.4844L54,45.5156V12a6,6,0,0,0-12,0V45.5156l-7.7578-7.7578a5.9994,5.9994,0,0,0-8.4844,8.4844Z" />
-              </g>
-            </svg>
-            Download
-          </button>
-          {openModal && <Modal openModal={openModal} closeModal={closeModal} />}
+
+          <DownloadBtn onClick={() => setOpenModal(true)}>Download</DownloadBtn>
+
+          {openModal && (
+            <Modal openModal={openModal} closeModal={closeModal}>
+              <h2 className="font-bold text-center text-green-600 text-xl mb-4">
+                Select Movie Quality
+              </h2>
+
+              <div className="flex justify-center">
+                {props.torrents.map((t, idx) => {
+                  return (
+                    <div
+                      key={t.hash}
+                      className={`${
+                        idx < props.torrents.length - 1 ? "border-r-2" : ""
+                      } p-4 text-center`}
+                    >
+                      <p className="uppercase font-bold mb-4 text-xl">
+                        {t.type}
+                      </p>
+                      <p className="text-gray-400 text-lg">File Size</p>
+                      <p className="font-bold text-xl mt-2">{t.size}</p>
+                      <DownloadBtn
+                        onClick={closeModal}
+                        className="text-lg"
+                        title={`Download ${props.title_long} ${t.quality} Torrent`}
+                      >
+                        <a href={t.url}>Download</a>
+                      </DownloadBtn>
+                    </div>
+                  );
+                })}
+              </div>
+            </Modal>
+          )}
         </div>
       </div>
       <div className="hidden sm:block mt-4 w-full">
@@ -84,7 +104,7 @@ export default function MovieDetails(props: MovieDetailsProps) {
         </div>
       </div>
       <h3 className="font-bold text-2xl mt-4 ">Plot Summary</h3>
-      <p className="text-xl text-gray-600">{props.description_full}</p>
+      <p className="text-lg text-gray-600">{props.description_full}</p>
     </div>
   );
 }
