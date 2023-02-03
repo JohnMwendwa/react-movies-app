@@ -15,7 +15,7 @@ export default function Modal({ openModal, closeModal, children }: ModalProps) {
         className="fixed inset-0 z-[999px] bg-gray-600 opacity-75"
         onClick={closeModal}
       />
-      <div className="fixed top-[50%] left-[50%] z-[999px] -translate-x-1/2 -translate-y-1/2 bg-white p-8">
+      <div className="fixed top-[50%] left-[50%] z-[999px] -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded-md">
         {children}
       </div>
     </>,
