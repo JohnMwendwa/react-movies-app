@@ -111,7 +111,7 @@ export const SearchMoviesProvider = ({
       `https://yts.mx/api/v2/list_movies.json?page=${page}`
     );
     const res = await request.json();
-    console.log(res);
+
     if (res.status === "ok") {
       setLoading(false);
       setTotalCount(res.data.movie_count);
