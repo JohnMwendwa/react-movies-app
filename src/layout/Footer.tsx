@@ -1,3 +1,9 @@
 export default function Footer() {
-  return <footer>Footer</footer>;
+  return (
+    <footer className="mt-auto bg-gray-200 px-4 py-6">
+      <p className="text-center">
+        &copy; John Mwendwa {new Date().getFullYear()}
+      </p>
+    </footer>
+  );
 }
