@@ -141,7 +141,18 @@ export const SearchMoviesProvider = ({
   };
 
   return (
-    <SearchMoviesContext.Provider value={{ movies, query, setQuery, loading }}>
+    <SearchMoviesContext.Provider
+      value={{
+        movies,
+        query,
+        setQuery,
+        loading,
+        currentPage,
+        totalCount,
+        limit,
+        onPageChange,
+      }}
+    >
       {children}
     </SearchMoviesContext.Provider>
   );
