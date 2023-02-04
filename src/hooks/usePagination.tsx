@@ -53,7 +53,7 @@ export function usePagination({
     /*
     	Case 2: No left dots to show, but rights dots to be shown
     */
-    if (!shouldShowLeftDots && shouldShowLeftDots) {
+    if (!shouldShowLeftDots && shouldShowRightDots) {
       let leftItemCount = 3 + 2 * siblingCount;
       let leftRange = range(1, leftItemCount);
       return [...leftRange, DOTS, totalPageCount];
