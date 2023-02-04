@@ -71,36 +71,46 @@ export const SearchMoviesProvider = ({
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const debouncedQuery = useDebounce(query, 500);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
+  let limit = 20;
+
+  const onPageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
   useEffect(() => {
     let mount = true;
     if (mount && debouncedQuery) {
-      fetchSearchedMovie();
+      fetchSearchedMovie(currentPage);
     }
 
     return () => {
       mount = false;
     };
-  }, [debouncedQuery]);
+  }, [debouncedQuery, currentPage]);
 
   useEffect(() => {
     let mount = true;
     if (mount) {
-      fetchMovies();
+      fetchMovies(currentPage);
     }
     return () => {
       mount = false;
     };
-  }, []);
+  }, [currentPage]);
 
   // Default movies to display
-  const fetchMovies = async () => {
+  const fetchMovies = async (page: number) => {
     setLoading(true);
-    const request = await fetch("https://yts.mx/api/v2/list_movies.json");
+    const request = await fetch(
+      `https://yts.mx/api/v2/list_movies.json?page=${page}`
+    );
     const res = await request.json();
-
+    console.log(res);
     if (res.status === "ok") {
       setLoading(false);
+      setTotalCount(res.data.movie_count);
       setMovies(res.data.movies);
       return;
     }
@@ -108,16 +118,17 @@ export const SearchMoviesProvider = ({
   };
 
   // Movies searched by the user
-  const fetchSearchedMovie = async () => {
+  const fetchSearchedMovie = async (page: number) => {
     setLoading(true);
     const request = await fetch(
-      `https://yts.mx/api/v2/list_movies.json?query_term=${debouncedQuery}`
+      `https://yts.mx/api/v2/list_movies.json?page=${page}&query_term=${debouncedQuery}`
     );
     const res = await request.json();
 
     if (res.status === "ok") {
       setLoading(false);
       if (res.data.movies) {
+        setTotalCount(res.data.movie_count);
         setMovies(res.data.movies);
       }
     } else {
