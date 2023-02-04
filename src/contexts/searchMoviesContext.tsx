@@ -9,6 +9,10 @@ import { useDebounce } from "../hooks/useDebounce";
 
 interface SearchMoviesContextProps {
   movies: Movie[];
+  currentPage: number;
+  limit: number;
+  totalCount: number;
+  onPageChange: (page: number) => void;
   query: string;
   loading: boolean;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
