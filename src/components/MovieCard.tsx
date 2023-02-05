@@ -20,7 +20,7 @@ export default function MovieCard(props: Movie) {
             </span>
             <div className="mb-4 text-3xl">{props.rating} / 10</div>
 
-            {props.genres.map((g, idx) => {
+            {props.genres?.map((g, idx) => {
               return <p key={idx}>{g}</p>;
             })}
 
