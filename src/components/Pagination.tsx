@@ -29,14 +29,17 @@ export default function Pagination() {
           </li>
         )}
 
-        {paginationRange.map((pageNumber) => {
+        {paginationRange.map((pageNumber, idx) => {
           if (typeof pageNumber === "string") {
             return (
-              <li className="px-2 py-1 border border-gray-600 mr-2">&#8230;</li>
+              <li key={idx} className="px-2 py-1 border border-gray-600 mr-2">
+                &#8230;
+              </li>
             );
           } else {
             return (
               <li
+                key={idx}
                 className={`cursor-pointer px-2 py-1 border border-gray-600 mr-2 ${
                   currentPage === pageNumber && "bg-gray-400 text-white"
                 }`}
