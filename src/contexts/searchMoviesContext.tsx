@@ -89,24 +89,19 @@ export const SearchMoviesProvider = ({
       fetchSearchedMovie(currentPage);
     }
 
+    if (mount && !debouncedQuery) {
+      fetchMovies(currentPage);
+    }
+
     return () => {
       mount = false;
     };
   }, [debouncedQuery, currentPage]);
 
-  useEffect(() => {
-    let mount = true;
-    if (mount) {
-      fetchMovies(currentPage);
-    }
-    return () => {
-      mount = false;
-    };
-  }, [currentPage]);
-
   // Default movies to display
   const fetchMovies = async (page: number) => {
     setLoading(true);
+
     const request = await fetch(
       `https://yts.mx/api/v2/list_movies.json?page=${page}`
     );
@@ -124,6 +119,7 @@ export const SearchMoviesProvider = ({
   // Movies searched by the user
   const fetchSearchedMovie = async (page: number) => {
     setLoading(true);
+
     const request = await fetch(
       `https://yts.mx/api/v2/list_movies.json?page=${page}&query_term=${debouncedQuery}`
     );
