@@ -57,9 +57,8 @@ export default function MovieDetails(props: MovieDetailsProps) {
           <div>
             <span className="md:text-xl text-lg">Available in : </span>
             {props.torrents?.map((t, idx) => (
-              <>
+              <span key={t.hash}>
                 <span
-                  key={idx}
                   className="rounded-md border border-gray-400 px-2 md:px-4 py-1 md:mr-2 font-medium hover:text-green-400 hover:border-gray-900 duration-300 ease-in-out md:inline-block mt-2 hidden"
                   title={`Download ${props.title_long} ${t.quality} Torrent`}
                 >
@@ -70,7 +69,7 @@ export default function MovieDetails(props: MovieDetailsProps) {
                 <DownloadBtn className="text-base bg-transparent border text-black border-black rounded-none py-1 md:hidden">
                   <a href={t.url}>{t.quality}</a>
                 </DownloadBtn>
-              </>
+              </span>
             ))}
           </div>
 
