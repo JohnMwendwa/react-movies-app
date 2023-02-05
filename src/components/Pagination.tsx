@@ -30,7 +30,7 @@ export default function Pagination() {
         )}
 
         {paginationRange.map((pageNumber) => {
-          if (pageNumber === DOTS) {
+          if (typeof pageNumber === "string") {
             return (
               <li className="px-2 py-1 border border-gray-600 mr-2">&#8230;</li>
             );
