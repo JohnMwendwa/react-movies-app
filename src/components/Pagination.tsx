@@ -21,23 +21,38 @@ export default function Pagination() {
     <nav className="text-center my-6 ">
       <ul className="flex justify-center">
         {currentPage > 1 && (
-          <li onClick={onPrevious} className=" cursor-pointer">
+          <li
+            onClick={onPrevious}
+            className=" cursor-pointer px-2 py-1 border border-gray-600 mr-2"
+          >
             &lt;&lt; Prev
           </li>
         )}
 
         {paginationRange.map((pageNumber) => {
           if (pageNumber === DOTS) {
-            return <li>&#8230;</li>;
+            return (
+              <li className="px-2 py-1 border border-gray-600 mr-2">&#8230;</li>
+            );
           } else {
             return (
-              <li onClick={() => onPageChange(pageNumber)}>{pageNumber}</li>
+              <li
+                className={`cursor-pointer px-2 py-1 border border-gray-600 mr-2 ${
+                  currentPage === pageNumber && "bg-gray-400 text-white"
+                }`}
+                onClick={() => onPageChange(pageNumber)}
+              >
+                {pageNumber}
+              </li>
             );
           }
         })}
 
         {currentPage !== lastPage && (
-          <li onClick={onNext} className="cursor-pointer">
+          <li
+            onClick={onNext}
+            className="cursor-pointer px-2 py-1 border border-gray-600 mr-2"
+          >
             Next &gt;&gt;
           </li>
         )}
