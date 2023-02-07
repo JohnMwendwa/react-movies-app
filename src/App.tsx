@@ -19,7 +19,7 @@ function App() {
           <Routes>
             <Route path={BASE_URL} element={<Home />} />
             <Route
-              path={`${BASE_URL}/movies/:id`}
+              path={`${BASE_URL}movies/:id`}
               element={<MovieDetailsPage />}
             />
             <Route path="/*" element={<NotFoundPage />} />
