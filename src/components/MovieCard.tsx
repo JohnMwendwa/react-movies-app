@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 import { Movie } from "../contexts/searchMoviesContext";
 
+const BASE_URL = "/react-movies-app/";
+
 export default function MovieCard(props: Movie) {
   return (
-    <Link to={`/movies/${props.slug}`}>
+    <Link to={`${BASE_URL}movies/${props.slug}`}>
       <div className="w-[210px] mx-auto">
         <div className="relative group">
           <img
