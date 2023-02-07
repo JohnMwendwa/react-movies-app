@@ -8,6 +8,8 @@ import NotFoundPage from "./pages/404";
 import Home from "./pages/Home";
 import MovieDetailsPage from "./pages/MovieDetailsPage";
 
+const BASE_URL = "/react-movies-app/";
+
 function App() {
   return (
     <>
@@ -15,8 +17,11 @@ function App() {
         <NavBar />
         <Layout>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/movies/:id" element={<MovieDetailsPage />} />
+            <Route path={BASE_URL} element={<Home />} />
+            <Route
+              path={`${BASE_URL}/movies/:id`}
+              element={<MovieDetailsPage />}
+            />
             <Route path="/*" element={<NotFoundPage />} />
           </Routes>
         </Layout>
