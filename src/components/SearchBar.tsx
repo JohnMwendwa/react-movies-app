@@ -9,15 +9,13 @@ function SearchBar() {
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        value={query}
-        onChange={handleChange}
-        placeholder="Quick Search Movies..."
-        className="border border-green-400 outline-green-400 px-4 py-1 rounded-full"
-      />
-    </div>
+    <input
+      type="text"
+      value={query}
+      onChange={handleChange}
+      placeholder="Quick Search Movies..."
+      className="border border-green-400 outline-green-400 px-4 py-1 rounded-full"
+    />
   );
 }
 
