@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import NavBar from "./components/NavBar";
@@ -6,7 +7,7 @@ import Footer from "./layout/Footer";
 import Layout from "./layout/Layout";
 import NotFoundPage from "./pages/404";
 import Home from "./pages/Home";
-import MovieDetailsPage from "./pages/MovieDetailsPage";
+const MovieDetailsPage = lazy(() => import("./pages/MovieDetailsPage"));
 
 const BASE_URL = "/react-movies-app/";
 
@@ -20,7 +21,11 @@ function App() {
             <Route path={BASE_URL} element={<Home />} />
             <Route
               path={`${BASE_URL}movies/:id`}
-              element={<MovieDetailsPage />}
+              element={
+                <Suspense fallback="Loading...">
+                  <MovieDetailsPage />
+                </Suspense>
+              }
             />
             <Route path="/*" element={<NotFoundPage />} />
           </Routes>
