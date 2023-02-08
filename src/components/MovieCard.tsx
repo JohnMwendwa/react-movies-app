@@ -13,6 +13,7 @@ export default function MovieCard(props: Movie) {
             alt={props.slug}
             width={210}
             height={315}
+            loading="lazy"
             className="rounded-md object-cover w-[210px] h-[auto] bg-gray-500 border-2 border-black "
           />
 
