@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import NavBar from "./components/NavBar";
@@ -12,6 +12,7 @@ const MovieDetailsPage = lazy(() => import("./pages/MovieDetailsPage"));
 const BASE_URL = "/react-movies-app/";
 
 function App() {
+  const [openSearch, setOpenSearch] = useState(false);
   return (
     <>
       <SearchMoviesProvider>
