@@ -1,9 +1,14 @@
 import React from "react";
 import SearchBar from "./SearchBar";
 
-export default function NavBar() {
+interface NavBarProps {
+  openSearch: boolean;
+  setOpenSearch: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function NavBar({ openSearch, setOpenSearch }: NavBarProps) {
   return (
-    <header className={`border-b md:mb-0 `}>
+    <header className={`border-b md:mb-0 ${openSearch ? "mb-20" : ""}`}>
       <div className="flex justify-between items-center px-3 py-2 max-w-7xl mx-auto relative">
         <a
           href="/"
@@ -13,7 +18,10 @@ export default function NavBar() {
           <span className="font-extrabold text-orange-400">_</span>
           <span className="font-extrabold text-green-400">O</span>M
         </a>
-        <div className="text-2xl mr-4 md:hidden">
+        <div
+          className="text-2xl mr-4 md:hidden"
+          onClick={() => setOpenSearch((prev) => !prev)}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
