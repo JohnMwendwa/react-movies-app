@@ -34,6 +34,15 @@ export default function NavBar({ openSearch, setOpenSearch }: NavBarProps) {
           <SearchBar />
         </div>
       </div>
+
+      {/* Mobile and small screen search bar */}
+      <div
+        className={`flex justify-center  py-4 absolute z-10 top-16 bg-gray-50 border-y left-0 right-0 ${
+          openSearch ? "block" : "hidden"
+        } md:hidden`}
+      >
+        <SearchBar />
+      </div>
     </header>
   );
 }
