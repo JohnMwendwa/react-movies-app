@@ -9,7 +9,7 @@ export default function MovieDetails(props: MovieDetailsProps) {
 
   const closeModal = () => setOpenModal(false);
   return (
-    <div className="my-4 ">
+    <div className="mb-4  ">
       <div className="md:hidden">
         <h1 className="font-extrabold text-3xl mb- ">{props.title_english}</h1>
         <p className="text-lg font-medium text-gray-500">{props.year}</p>
@@ -36,7 +36,7 @@ export default function MovieDetails(props: MovieDetailsProps) {
           className="rounded-md object-cover w-[210px] h-[auto] bg-gray-500 border-2 border-black"
         />
 
-        <div className="ml-8">
+        <div className="ml-4 md:ml-8">
           <div className="md:block hidden">
             <h1 className="font-extrabold text-5xl mb-4 ">
               {props.title_english}
