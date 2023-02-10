@@ -19,7 +19,7 @@ function App() {
         <NavBar openSearch={openSearch} setOpenSearch={setOpenSearch} />
         <Layout>
           <Routes>
-            <Route path={BASE_URL} element={<Home openSearch={openSearch} />} />
+            <Route path={BASE_URL} element={<Home />} />
             <Route
               path={`${BASE_URL}movies/:id`}
               element={
