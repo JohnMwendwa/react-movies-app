@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
-import { Movie } from "../contexts/searchMoviesContext";
+import { Movie, useSearchMoviesContext } from "../contexts/searchMoviesContext";
 
 const BASE_URL = "/react-movies-app/";
 
 export default function MovieCard(props: Movie) {
+  const { setQuery } = useSearchMoviesContext();
   return (
-    <Link to={`${BASE_URL}movies/${props.slug}`}>
+    <Link to={`${BASE_URL}movies/${props.slug}`} onClick={() => setQuery("")}>
       <div className="w-[210px] mx-auto">
         <div className="relative group">
           <img
