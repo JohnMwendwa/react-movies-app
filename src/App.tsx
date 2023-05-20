@@ -9,7 +9,7 @@ import NotFoundPage from "./pages/404";
 import Home from "./pages/Home";
 const MovieDetailsPage = lazy(() => import("./pages/MovieDetailsPage"));
 
-const BASE_URL = "/react-movies-app/";
+export const BASE_URL = "/react-movies-app/";
 
 function App() {
   const [openSearch, setOpenSearch] = useState(false);
