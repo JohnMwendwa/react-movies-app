@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { BASE_URL } from "../App";
 
 import { MovieDetailsProps } from "../pages/MovieDetailsPage";
@@ -10,6 +10,7 @@ import { useSearchMoviesContext } from "../contexts/searchMoviesContext";
 export default function MovieDetails(props: MovieDetailsProps) {
   const [openModal, setOpenModal] = useState(false);
   const { movies, query, setQuery } = useSearchMoviesContext();
+  const navigate = useNavigate();
 
   const closeModal = () => setOpenModal(false);
   return (
@@ -169,6 +170,15 @@ export default function MovieDetails(props: MovieDetailsProps) {
           ))}
         </div>
       )}
+
+      <div className="flex justify-center mt-4">
+        <button
+          className="bg-black hover:bg-gray-900 text-white px-6 py-2 rounded-md"
+          onClick={() => navigate(-1)}
+        >
+          Back
+        </button>
+      </div>
     </div>
   );
 }
