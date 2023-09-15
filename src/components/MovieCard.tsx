@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Movie, useSearchMoviesContext } from "../contexts/searchMoviesContext";
 
-const BASE_URL = "/react-movies-app/";
+const BASE_URL = "/";
 
 export default function MovieCard(props: Movie) {
   const { setQuery } = useSearchMoviesContext();
