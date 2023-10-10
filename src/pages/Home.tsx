@@ -1,9 +1,15 @@
+import { useEffect } from "react";
+
 import MovieCard from "../components/MovieCard";
 import Pagination from "../components/Pagination";
 import { useSearchMoviesContext } from "../contexts/searchMoviesContext";
 
 export default function Home() {
-  const { movies } = useSearchMoviesContext();
+  const { movies, onPageChange } = useSearchMoviesContext();
+
+  useEffect(() => {
+    onPageChange(1);
+  }, []);
 
   return (
     <>

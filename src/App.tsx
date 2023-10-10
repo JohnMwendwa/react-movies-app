@@ -7,6 +7,8 @@ import Footer from "./layout/Footer";
 import Layout from "./layout/Layout";
 import NotFoundPage from "./pages/404";
 import Home from "./pages/Home";
+import MoviesPage from "./pages/MoviesPage";
+
 const MovieDetailsPage = lazy(() => import("./pages/MovieDetailsPage"));
 
 export const BASE_URL = "/";
@@ -28,6 +30,8 @@ function App() {
                 </Suspense>
               }
             />
+            <Route path={`${BASE_URL}page/:pageId`} element={<MoviesPage />} />
+
             <Route path="/*" element={<NotFoundPage />} />
           </Routes>
         </Layout>

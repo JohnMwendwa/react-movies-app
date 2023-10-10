@@ -1,32 +1,26 @@
+import { Link } from "react-router-dom";
 import { useSearchMoviesContext } from "../contexts/searchMoviesContext";
-import { usePagination, DOTS } from "../hooks/usePagination";
+import { usePagination } from "../hooks/usePagination";
 
 export default function Pagination() {
-  const { currentPage, limit, totalCount, onPageChange } =
-    useSearchMoviesContext();
+  const { currentPage, limit, totalCount } = useSearchMoviesContext();
   const paginationRange = usePagination({ totalCount, limit, currentPage })!;
 
   if (paginationRange?.length < 2) {
     return null;
   }
-  const onNext = () => {
-    onPageChange(currentPage + 1);
-  };
-  const onPrevious = () => {
-    onPageChange(currentPage - 1);
-  };
+
   let lastPage = paginationRange[paginationRange?.length - 1];
 
   return (
     <nav className="text-center my-6 ">
       <ul className="flex justify-center">
         {currentPage > 1 && (
-          <li
-            onClick={onPrevious}
-            className=" cursor-pointer px-2 py-1 border border-gray-600 mr-2"
-          >
-            &lt;&lt; Prev
-          </li>
+          <Link to={`/page/${currentPage - 1}`}>
+            <li className="cursor-pointer px-2 py-1 border border-gray-600 mr-2">
+              &lt;&lt; Prev
+            </li>
+          </Link>
         )}
 
         {paginationRange.map((pageNumber, idx) => {
@@ -38,26 +32,26 @@ export default function Pagination() {
             );
           } else {
             return (
-              <li
-                key={idx}
-                className={`cursor-pointer px-2 py-1 border border-gray-600 mr-2 ${
-                  currentPage === pageNumber && "bg-gray-400 text-white"
-                }`}
-                onClick={() => onPageChange(pageNumber)}
-              >
-                {pageNumber}
-              </li>
+              <Link key={idx} to={`/page/${pageNumber}`}>
+                <li
+                  className={`cursor-pointer px-2 py-1 border border-gray-600 mr-2 ${
+                    currentPage === pageNumber &&
+                    "bg-gray-400 text-white cursor-not-allowed"
+                  }`}
+                >
+                  {pageNumber}
+                </li>
+              </Link>
             );
           }
         })}
 
         {currentPage !== lastPage && (
-          <li
-            onClick={onNext}
-            className="cursor-pointer px-2 py-1 border border-gray-600 mr-2"
-          >
-            Next &gt;&gt;
-          </li>
+          <Link to={`/page/${currentPage + 1}`}>
+            <li className="cursor-pointer px-2 py-1 border border-gray-600 mr-2">
+              Next &gt;&gt;
+            </li>
+          </Link>
         )}
       </ul>
     </nav>
