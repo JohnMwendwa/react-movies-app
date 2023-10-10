@@ -8,7 +8,11 @@ interface NavBarProps {
 
 export default function NavBar({ openSearch, setOpenSearch }: NavBarProps) {
   return (
-    <header className={`border-b md:mb-0 ${openSearch ? "mb-20" : ""}`}>
+    <header
+      className={`border-b bg-gray-100 py-2 md:mb-0 ${
+        openSearch ? "mb-20" : ""
+      }`}
+    >
       <div className="flex justify-between items-center px-3 py-2 max-w-7xl mx-auto relative">
         <a
           href="/"
@@ -37,7 +41,7 @@ export default function NavBar({ openSearch, setOpenSearch }: NavBarProps) {
 
       {/* Mobile and small screen search bar */}
       <div
-        className={`flex justify-center  py-4 absolute z-10 top-16 bg-gray-50 border-y left-0 right-0 ${
+        className={`flex justify-center py-4 absolute z-10 top-20 bg-gray-100 border-y left-0 right-0 ${
           openSearch ? "block" : "hidden"
         } md:hidden`}
       >
