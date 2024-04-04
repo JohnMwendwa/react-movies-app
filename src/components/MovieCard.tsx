@@ -8,17 +8,17 @@ export default function MovieCard(props: Movie) {
   return (
     <Link to={`${BASE_URL}movies/${props.slug}`} onClick={() => setQuery("")}>
       <div className="w-[210px] mx-auto">
-        <div className="relative group">
+        <div className="relative group rounded-lg shadow-lg shadow-black">
           <img
             src={props.medium_cover_image}
             alt={props.slug}
             width={210}
             height={315}
             loading="lazy"
-            className="rounded-md object-cover w-[210px] h-[auto] bg-gray-500 border-2 border-black "
+            className="rounded-lg object-cover w-[210px] h-[auto] bg-gray-500"
           />
 
-          <div className="hidden absolute inset-0  group-hover:flex flex-col items-center justify-center text-white font-extrabold bg-gray-800/75 text-2xl ">
+          <div className="opacity-0 absolute inset-0  flex group-hover:opacity-100 flex-col items-center justify-center text-white font-extrabold bg-gray-800/80 text-2xl rounded-lg transition-opacity duration-300">
             <span aria-label="start icon" className="text-yellow-400 text-3xl">
               &#10032;
             </span>
@@ -33,7 +33,9 @@ export default function MovieCard(props: Movie) {
             </button>
           </div>
         </div>
-        <h3 className="font-bold text-lg">{props.title_english}</h3>
+        <h3 className="font-bold text-lg mt-2 left-4 leading-5">
+          {props.title_english}
+        </h3>
         <p className="font-bold text-gray-600">{props.year}</p>
       </div>
     </Link>
