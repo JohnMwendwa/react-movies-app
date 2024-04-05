@@ -38,7 +38,7 @@ export default function MovieDetails(props: MovieDetailsProps) {
           width={240}
           height={315}
           loading="lazy"
-          className="rounded-lg object-cover w-[240px] h-[auto] bg-gray-800 shadow-lg shadow-black/30"
+          className="rounded-lg object-cover w-[210px] sm:w-[240px] h-[auto] bg-gray-800 shadow-lg shadow-black/30"
         />
 
         <div className="ml-4 md:ml-8">
@@ -72,7 +72,7 @@ export default function MovieDetails(props: MovieDetailsProps) {
                     {t.quality} <span className="uppercase">{t.type}</span>
                   </a>
                 </span>
-                <DownloadBtn className="text-base bg-transparent border text-black border-black rounded-none py-1 md:hidden">
+                <DownloadBtn className="text-base bg-transparent border text-white/70 border-gray-600 hover:border-orange-600 hover:text-orange-600 transition-all rounded-none py-1 md:hidden">
                   <a href={t.url}>{t.quality}</a>
                 </DownloadBtn>
               </span>
