@@ -14,7 +14,7 @@ function SearchBar() {
       value={query}
       onChange={handleChange}
       placeholder="Quick Search Movies..."
-      className="border border-green-400 outline-green-400 px-4 py-1 rounded-full"
+      className="border border-orange-400 outline-orange-400 px-4 py-1 rounded-full text-orange-700 font-medium"
     />
   );
 }
