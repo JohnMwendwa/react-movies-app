@@ -31,14 +31,14 @@ export default function MovieDetails(props: MovieDetailsProps) {
           })}
         </div>
       </div>
-      <div className="flex ">
+      <div className="flex">
         <img
           src={props.medium_cover_image}
           alt={props.slug}
-          width={210}
+          width={240}
           height={315}
           loading="lazy"
-          className="rounded-md object-cover w-[210px] h-[auto] bg-gray-500 border-2 border-black"
+          className="rounded-lg object-cover w-[240px] h-[auto] bg-gray-800 shadow-lg shadow-black/30"
         />
 
         <div className="ml-4 md:ml-8">
@@ -65,7 +65,7 @@ export default function MovieDetails(props: MovieDetailsProps) {
             {props.torrents?.map((t, idx) => (
               <span key={t.hash}>
                 <span
-                  className="rounded-md border border-gray-400 px-2 md:px-4 py-1 md:mr-2 font-medium hover:text-green-400 hover:border-gray-900 duration-300 ease-in-out md:inline-block mt-2 hidden"
+                  className="rounded-md border border-gray-400 px-2 md:px-4 py-1 md:mr-2 font-medium hover:text-white/70 hover:border-orange-600 duration-300 ease-in-out md:inline-block mt-2 hidden"
                   title={`Download ${props.title_long} ${t.quality} Torrent`}
                 >
                   <a href={t.url}>
@@ -138,7 +138,9 @@ export default function MovieDetails(props: MovieDetailsProps) {
         )}
       </div>
       <h3 className="font-bold text-2xl mt-4 ">Plot Summary</h3>
-      <p className="text-lg text-gray-600">{props.description_full}</p>
+      <p className="text-lg text-gray-400 max-w-5xl">
+        {props.description_full}
+      </p>
 
       {query.length !== 0 && movies.length !== 0 && (
         <div className="bg-gray-300/20 w-[300px] overflow-hidden overflow-y-auto max-h-[200px] md:max-h-96 shadow-md hide flex flex-col gap-2 px-1 absolute -top-6 md:top-16 -right-4 md:right-0 z-10 backdrop-blur-sm">
@@ -146,11 +148,9 @@ export default function MovieDetails(props: MovieDetailsProps) {
             <Link
               to={`${BASE_URL}movies/${movie.slug}`}
               onClick={() => setQuery("")}
+              key={movie.id}
             >
-              <div
-                key={movie.id}
-                className="grid grid-cols-[50px_1fr]  border-b-2"
-              >
+              <div className="grid grid-cols-[50px_1fr]  border-b-2">
                 <div>
                   <img
                     src={movie.medium_cover_image}
