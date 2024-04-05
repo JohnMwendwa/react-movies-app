@@ -7,15 +7,15 @@ export default function MovieCard(props: Movie) {
   const { setQuery } = useSearchMoviesContext();
   return (
     <Link to={`${BASE_URL}movies/${props.slug}`} onClick={() => setQuery("")}>
-      <div className="w-[210px] mx-auto">
-        <div className="relative group rounded-lg shadow-lg shadow-black">
+      <div className="w-[240px] mx-auto">
+        <div className="relative group rounded-lg shadow-lg shadow-black/30">
           <img
             src={props.medium_cover_image}
             alt={props.slug}
             width={210}
             height={315}
             loading="lazy"
-            className="rounded-lg object-cover w-[210px] h-[auto] bg-gray-500"
+            className="rounded-lg object-cover w-[240px] h-[auto] bg-gray-500"
           />
 
           <div className="opacity-0 absolute inset-0  flex group-hover:opacity-100 flex-col items-center justify-center text-white font-extrabold bg-gray-800/80 text-2xl rounded-lg transition-opacity duration-300">
@@ -33,10 +33,10 @@ export default function MovieCard(props: Movie) {
             </button>
           </div>
         </div>
-        <h3 className="font-bold text-lg mt-2 left-4 leading-5">
+        <h3 className="font-bold text-lg mt-2 left-4 leading-5 text-white">
           {props.title_english}
         </h3>
-        <p className="font-bold text-gray-600">{props.year}</p>
+        <p className="font-bold text-orange-600">{props.year}</p>
       </div>
     </Link>
   );
