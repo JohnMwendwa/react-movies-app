@@ -5,6 +5,7 @@ import {
   useState,
   useContext,
 } from "react";
+import { useLocation } from "react-router-dom";
 import { useDebounce } from "../hooks/useDebounce";
 
 interface SearchMoviesContextProps {
@@ -75,8 +76,16 @@ export const SearchMoviesProvider = ({
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const debouncedQuery = useDebounce(query, 500);
-  const [currentPage, setCurrentPage] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
+  const slug = useLocation();
+  const [currentPage, setCurrentPage] = useState(() => {
+    let pathname = slug.pathname.split("/");
+    // Check if the pathname has a number
+    if (pathname.length > 2 && !isNaN(Number(pathname[2]))) {
+      return Number(pathname[2]);
+    }
+    return 1;
+  });
   let limit = 20;
 
   const onPageChange = (page: number) => {
