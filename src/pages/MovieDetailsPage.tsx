@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 import MovieDetails from "../components/MovieDetails";
 import { Movie, useSearchMoviesContext } from "../contexts/searchMoviesContext";
+import NotFoundPage from "./404";
 
 export interface MovieDetailsProps extends Movie {
   medium_screenshot_image1: string;
@@ -19,7 +20,7 @@ export default function MovieDetailsPage() {
 
   useEffect(() => {
     let mounted = true;
-    if (id !== "" && mounted) {
+    if (id && mounted) {
       fetchMovie(id);
     }
 
@@ -40,9 +41,13 @@ export default function MovieDetailsPage() {
     return;
   };
 
-  return (
-    <div>
-      <MovieDetails {...movie} />
-    </div>
-  );
+  if (!id) {
+    return <NotFoundPage />;
+  } else {
+    return (
+      <div>
+        <MovieDetails {...movie} />
+      </div>
+    );
+  }
 }
