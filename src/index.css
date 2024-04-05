@@ -2,13 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-#root {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-
-  @apply bg-gray-100;
-}
 .hide {
   scrollbar-width: none;
 }
