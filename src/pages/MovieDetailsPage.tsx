@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import MovieDetails from "../components/MovieDetails";
 import { Movie, useSearchMoviesContext } from "../contexts/searchMoviesContext";
 import NotFoundPage from "./404";
+import Loading from "../components/Loading";
 
 export interface MovieDetailsProps extends Movie {
   medium_screenshot_image1: string;
@@ -14,7 +15,7 @@ export interface MovieDetailsProps extends Movie {
 export default function MovieDetailsPage() {
   const [movie, setMovie] = useState({} as MovieDetailsProps);
   const params = useParams();
-  const { movies } = useSearchMoviesContext();
+  const { movies, loading } = useSearchMoviesContext();
 
   const id = movies.find((movie) => movie.slug === params.id)?.id || "";
 
@@ -41,7 +42,9 @@ export default function MovieDetailsPage() {
     return;
   };
 
-  if (!id) {
+  if (loading) {
+    return <Loading />;
+  } else if (!id) {
     return <NotFoundPage />;
   } else {
     return (
