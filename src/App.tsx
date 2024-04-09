@@ -6,8 +6,7 @@ import Layout from "./layout/Layout";
 import NotFoundPage from "./pages/404";
 import Home from "./pages/Home";
 import MoviesPage from "./pages/MoviesPage";
-
-const MovieDetailsPage = lazy(() => import("./pages/MovieDetailsPage"));
+import MovieDetailsPage from "./pages/MovieDetailsPage";
 
 export const BASE_URL = "/";
 
@@ -19,11 +18,7 @@ function App() {
           <Route path={BASE_URL} element={<Home />} />
           <Route
             path={`${BASE_URL}movies/:id`}
-            element={
-              <Suspense fallback="Loading...">
-                <MovieDetailsPage />
-              </Suspense>
-            }
+            element={<MovieDetailsPage />}
           />
           <Route path={`${BASE_URL}page/:pageId`} element={<MoviesPage />} />
 
