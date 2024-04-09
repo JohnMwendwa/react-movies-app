@@ -1,9 +1,12 @@
+import Loading from "../components/Loading";
 import MovieCard from "../components/MovieCard";
 import Pagination from "../components/Pagination";
 import { useSearchMoviesContext } from "../contexts/searchMoviesContext";
 
 export default function Home() {
-  const { movies } = useSearchMoviesContext();
+  const { movies, loading } = useSearchMoviesContext();
+
+  if (loading) return <Loading />;
 
   return (
     <>
