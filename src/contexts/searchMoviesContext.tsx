@@ -18,6 +18,8 @@ interface SearchMoviesContextProps {
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
+  isMovieDetailsPage: boolean;
+  setIsMovieDetailsPage: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface Movie {
@@ -87,6 +89,9 @@ export const SearchMoviesProvider = ({
     }
     return 1;
   });
+  // Check if the user is on the movie details page
+  const [isMovieDetailsPage, setIsMovieDetailsPage] = useState(false);
+
   let limit = 20;
 
   const onPageChange = (page: number) => {
@@ -158,6 +163,8 @@ export const SearchMoviesProvider = ({
         limit,
         onPageChange,
         setLoading,
+        isMovieDetailsPage,
+        setIsMovieDetailsPage,
       }}
     >
       {children}
