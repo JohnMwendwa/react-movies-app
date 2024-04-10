@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { BASE_URL } from "../App";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { MovieDetailsProps } from "../pages/MovieDetailsPage";
 import DownloadBtn from "./DownloadBtn";
@@ -9,8 +8,12 @@ import { useSearchMoviesContext } from "../contexts/searchMoviesContext";
 
 export default function MovieDetails(props: MovieDetailsProps) {
   const [openModal, setOpenModal] = useState(false);
-  const { movies, query, setQuery } = useSearchMoviesContext();
+  const { setIsMovieDetailsPage } = useSearchMoviesContext();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsMovieDetailsPage(true);
+  }, []);
 
   const closeModal = () => setOpenModal(false);
   return (
@@ -141,37 +144,6 @@ export default function MovieDetails(props: MovieDetailsProps) {
       <p className="text-lg text-gray-400 max-w-5xl">
         {props.description_full}
       </p>
-
-      {query.length !== 0 && movies.length !== 0 && (
-        <div className="bg-gray-300/20 w-[300px] overflow-hidden overflow-y-auto max-h-[200px] md:max-h-96 shadow-md hide flex flex-col gap-2 px-1 absolute -top-6 md:top-16 -right-4 md:right-0 z-10 backdrop-blur-sm">
-          {movies.slice(0, 15).map((movie) => (
-            <Link
-              to={`${BASE_URL}movies/${movie.slug}`}
-              onClick={() => setQuery("")}
-              key={movie.id}
-            >
-              <div className="grid grid-cols-[50px_1fr]  border-b-2">
-                <div>
-                  <img
-                    src={movie.medium_cover_image}
-                    alt={movie.slug}
-                    width={50}
-                    height={50}
-                    loading="lazy"
-                    className="rounded-md object-cover bg-gray-500 border-2"
-                  />
-                </div>
-                <div className="ml-2 mt-2">
-                  <h2 className="font-bold text- leading-4 mb-1">
-                    {movie.title_english}
-                  </h2>
-                  <p className="text-sm">{movie.year}</p>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      )}
 
       <div className="flex justify-center mt-4">
         <button
