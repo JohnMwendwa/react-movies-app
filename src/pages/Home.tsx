@@ -1,10 +1,15 @@
+import { useEffect } from "react";
 import MovieCard from "../components/MovieCard";
 import Pagination from "../components/Pagination";
 import HomePageSkeleton from "../components/loading/HomePageSkeleton";
 import { useSearchMoviesContext } from "../contexts/searchMoviesContext";
 
 export default function Home() {
-  const { movies, loading } = useSearchMoviesContext();
+  const { movies, loading, setIsMovieDetailsPage } = useSearchMoviesContext();
+
+  useEffect(() => {
+    setIsMovieDetailsPage(false);
+  }, []);
 
   if (loading) return <HomePageSkeleton />;
   return (
