@@ -15,7 +15,7 @@ export interface MovieDetailsProps extends Movie {
 export default function MovieDetailsPage() {
   const [movie, setMovie] = useState({} as MovieDetailsProps);
   const params = useParams();
-  const { movies, loading } = useSearchMoviesContext();
+  const { movies, loading, setLoading } = useSearchMoviesContext();
 
   const id = movies.find((movie) => movie.slug === params.id)?.id || "";
 
@@ -31,11 +31,14 @@ export default function MovieDetailsPage() {
   }, [id]);
 
   const fetchMovie = async (id: number) => {
+    setLoading(true);
+
     const request = await fetch(
       `https://yts.mx/api/v2/movie_details.json?movie_id=${id}&with_images=true&with_cast=true`
     );
     const res = await request.json();
 
+    setLoading(false);
     if (res.status === "ok") {
       setMovie(res.data.movie);
     }
