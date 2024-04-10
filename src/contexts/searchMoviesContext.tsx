@@ -16,6 +16,7 @@ interface SearchMoviesContextProps {
   onPageChange: (page: number) => void;
   query: string;
   loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
 }
 
@@ -156,6 +157,7 @@ export const SearchMoviesProvider = ({
         totalCount,
         limit,
         onPageChange,
+        setLoading,
       }}
     >
       {children}
