@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import MovieDetails from "../components/MovieDetails";
 import { Movie, useSearchMoviesContext } from "../contexts/searchMoviesContext";
 import NotFoundPage from "./404";
-import Loading from "../components/Loading";
+import MovieDetailsSkeleton from "../components/loading/MovieDetailsSkeleton";
 
 export interface MovieDetailsProps extends Movie {
   medium_screenshot_image1: string;
@@ -43,7 +43,7 @@ export default function MovieDetailsPage() {
   };
 
   if (loading) {
-    return <Loading />;
+    return <MovieDetailsSkeleton />;
   } else if (!id) {
     return <NotFoundPage />;
   } else {
