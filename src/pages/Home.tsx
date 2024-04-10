@@ -1,13 +1,12 @@
-import Loading from "../components/Loading";
 import MovieCard from "../components/MovieCard";
 import Pagination from "../components/Pagination";
+import HomePageSkeleton from "../components/loading/HomePageSkeleton";
 import { useSearchMoviesContext } from "../contexts/searchMoviesContext";
 
 export default function Home() {
   const { movies, loading } = useSearchMoviesContext();
 
-  if (loading) return <Loading />;
-
+  if (loading) return <HomePageSkeleton />;
   return (
     <>
       <div className="grid gap-8 grid-cols-[repeat(auto-fit,_240px)] place-content-center ">
