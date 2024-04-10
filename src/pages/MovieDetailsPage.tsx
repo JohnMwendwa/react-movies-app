@@ -14,23 +14,22 @@ export interface MovieDetailsProps extends Movie {
 
 export default function MovieDetailsPage() {
   const [movie, setMovie] = useState({} as MovieDetailsProps);
+  const [movieId, setMovieId] = useState<Number | String>("");
+  const [loading, setLoading] = useState(false);
   const params = useParams();
-  const { movies, loading, setLoading } = useSearchMoviesContext();
+  const { movies } = useSearchMoviesContext();
 
   const id = movies.find((movie) => movie.slug === params.id)?.id || "";
 
+  // Fetch movie details when the movie id chnages
   useEffect(() => {
-    let mounted = true;
-    if (id && mounted) {
-      fetchMovie(id);
+    if (id) {
+      fetchMovie();
+      setMovieId(id);
     }
-
-    return () => {
-      mounted = false;
-    };
   }, [id]);
 
-  const fetchMovie = async (id: number) => {
+  const fetchMovie = async () => {
     setLoading(true);
 
     const request = await fetch(
@@ -47,7 +46,7 @@ export default function MovieDetailsPage() {
 
   if (loading) {
     return <MovieDetailsSkeleton />;
-  } else if (!id) {
+  } else if (!movieId) {
     return <NotFoundPage />;
   } else {
     return (
