@@ -17,7 +17,6 @@ export default function MovieDetailsPage() {
   const [movieId, setMovieId] = useState<Number | String>("");
   const [loading, setLoading] = useState(false);
   const params = useParams();
-  console.log(params)
   const { movies } = useSearchMoviesContext();
 
   const id = movies.find((movie) => movie.slug === params.id)?.id || "";
