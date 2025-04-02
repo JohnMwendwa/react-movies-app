@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useSearchMoviesContext } from "../contexts/searchMoviesContext";
-import { BASE_URL } from "../App";
+import { BASE_URL } from "../router/config";
 
 function SearchBar() {
   const { query, setQuery, onPageChange, isMovieDetailsPage, movies } =

@@ -26,6 +26,7 @@ export default function MovieDetailsPage() {
     if (id) {
       fetchMovie();
       setMovieId(id);
+      console.log(movieId)
     }
   }, [id]);
 
