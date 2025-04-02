@@ -1,23 +1,17 @@
 import React from 'react'
 import {Routes, Route} from "react-router-dom"
-import { BASE_URL } from './config'
-const Home = React.lazy(()=> import('../pages/Home'))
-const MovieDetailsPage = React.lazy(()=> import('../pages/MovieDetailsPage'))
-const MoviesPage = React.lazy(()=> import('../pages/MoviesPage'))
-const NotFoundPage = React.lazy(()=> import('../pages/404'))
+import { routes } from './config'
+
 const Router = () => {
   return (
     <React.Fragment>
         <React.Suspense fallback={null}>
             <Routes>
-                <Route path={BASE_URL} element={<Home />} />
-                <Route
-                    path={`${BASE_URL}movies/:id`}
-                    element={<MovieDetailsPage />}
-                />
-                <Route path={`${BASE_URL}page/:pageId`} element={<MoviesPage />} />
-
-                <Route path="/*" element={<NotFoundPage />} />
+              {
+                routes.map(route=>
+                  <Route key={route.id} path={route.path} element={<route.element/>}/>
+                )
+              }
             </Routes>
         </React.Suspense>
     </React.Fragment>
