@@ -25,8 +25,8 @@ Begin by
 
 ## What's included
 
-- [headlessui][headlessui] - React UI library that contains a set of high quality completely unstyled, fully accessible UI components, designed to integrate beautifully with Tailwind CSS.
-- [react-router-dom][react-router-dom] - Each file inside the src/pages directory will generate its own route, so you don't have to manually handle the routing.
-- [tailwind-css][tailwind-css] - Variant on an utility-first CSS framework which solves many of the problems with traditional CSS.
-- [styled-componets][styled-componets] - Variant on “CSS-in-JS”—which solves many of the problems with traditional CSS.
-- [gh-pages][gh-pages] - deploy the version of the app to GitHub Pages.
+- `headlessui` - React UI library that contains a set of high quality completely unstyled, fully accessible UI components, designed to integrate beautifully with Tailwind CSS.
+- `react-router-dom` - Each file inside the src/pages directory will generate its own route, so you don't have to manually handle the routing.
+- `tailwind-css` - Variant on an utility-first CSS framework which solves many of the problems with traditional CSS.
+- `styled-componets` - Variant on “CSS-in-JS”—which solves many of the problems with traditional CSS.
+- `gh-pages` - deploy the version of the app to GitHub Pages.
