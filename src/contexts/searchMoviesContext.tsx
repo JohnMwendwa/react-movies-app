@@ -99,57 +99,37 @@ export const SearchMoviesProvider = ({
   };
 
   useEffect(() => {
-    let mount = true;
-    if (mount && debouncedQuery) {
-      fetchSearchedMovie(currentPage);
-    }
+    const controller = new AbortController();
+    const { signal } = controller;
 
-    if (mount && !debouncedQuery) {
-      fetchMovies(currentPage);
-    }
+    const fetchMovies = async () => {
+      setLoading(true);
+      const url = debouncedQuery
+        ? `https://yts.mx/api/v2/list_movies.json?page=${currentPage}&query_term=${debouncedQuery}`
+        : `https://yts.mx/api/v2/list_movies.json?page=${currentPage}`;
 
-    return () => {
-      mount = false;
-    };
-  }, [debouncedQuery, currentPage]);
+      try {
+        const request = await fetch(url, { signal });
+        const res = await request.json();
 
-  // Default movies to display
-  const fetchMovies = async (page: number) => {
-    setLoading(true);
-
-    const request = await fetch(
-      `https://yts.mx/api/v2/list_movies.json?page=${page}`
-    );
-    const res = await request.json();
-
-    if (res.status === "ok") {
-      setLoading(false);
-      setTotalCount(res.data.movie_count);
-      setMovies(res.data.movies);
-      return;
-    }
-    setLoading(false);
-  };
-
-  // Movies searched by the user
-  const fetchSearchedMovie = async (page: number) => {
-    setLoading(true);
-
-    const request = await fetch(
-      `https://yts.mx/api/v2/list_movies.json?page=${page}&query_term=${debouncedQuery}`
-    );
-    const res = await request.json();
-
-    if (res.status === "ok") {
-      setLoading(false);
-      if (res.data.movies) {
-        setTotalCount(res.data.movie_count);
-        setMovies(res.data.movies);
+        if (!signal.aborted && res.status === "ok") {
+          setTotalCount(res.data.movie_count);
+          setMovies(res.data.movies ?? []);
+        }
+      } catch (error) {
+        if (!signal.aborted) {
+          console.error("Failed to fetch movies:", error);
+        }
+      } finally {
+        if (!signal.aborted) {
+          setLoading(false);
+        }
       }
-    } else {
-      setLoading(false);
-    }
-  };
+    };
+
+    fetchMovies();
+    return () => controller.abort();
+  }, [debouncedQuery, currentPage]);
 
   return (
     <SearchMoviesContext.Provider

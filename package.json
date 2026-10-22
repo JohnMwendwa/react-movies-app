@@ -14,7 +14,8 @@
   "scripts": {
     "dev": "vite --port 3000",
     "build": "tsc && vite build",
-    "preview": "vite preview --port 3000"
+    "preview": "vite preview --port 3000",
+    "test": "node --test tests/*.test.mjs"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.7",
@@ -30,6 +31,7 @@
     "autoprefixer": "^10.4.13",
     "gh-pages": "^5.0.0",
     "postcss": "^8.4.21",
+    "react-test-renderer": "^18.3.1",
     "tailwindcss": "^3.2.4",
     "typescript": "^4.9.3",
     "vite": "^4.0.0"
