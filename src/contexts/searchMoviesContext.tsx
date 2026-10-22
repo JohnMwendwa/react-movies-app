@@ -136,7 +136,7 @@ export const SearchMoviesProvider = ({
     setLoading(true);
 
     const request = await fetch(
-      `https://yts.mx/api/v2/list_movies.json?page=${page}&query_term=${debouncedQuery}`
+      `https://yts.mx/api/v2/list_movies.json?page=${page}&query_term=${encodeURIComponent(debouncedQuery)}`
     );
     const res = await request.json();
 
